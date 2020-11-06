@@ -1,18 +1,21 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using Photon.Pun;
+using UnityEngine.UI;
 
 public class Room_Controller : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField]
+    public Transform LobbyPanel;
 
-    // Update is called once per frame
-    void Update()
+    public void JoinRoom()
     {
-        
+        LobbyPanel = this.transform.parent;
+        LobbyPanel = LobbyPanel.transform.parent;
+        string roomInfo = this.GetComponentInChildren<Text>().text;
+        string[] RoomInfoSplit = roomInfo.Split(' ');
+        string roomname = RoomInfoSplit[1];
+        roomname = roomname.Trim('\'');
+        PhotonNetwork.JoinRoom(roomname);
+        LobbyPanel.gameObject.SetActive(false);
     }
 }
