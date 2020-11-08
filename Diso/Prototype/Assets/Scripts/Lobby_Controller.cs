@@ -3,6 +3,7 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine.UI;
+using System.Reflection;
 
 public class Lobby_Controller : MonoBehaviourPunCallbacks
 {
@@ -30,9 +31,9 @@ public class Lobby_Controller : MonoBehaviourPunCallbacks
     [SerializeField]
     public InputField NameID;
     [SerializeField]
-    public GameObject RoomList;
+    public Transform RoomList;
     [SerializeField]
-    public GameObject PlayerList;
+    public Transform PlayerLists;
     [SerializeField]
     public GameObject RoomListPrefab;
     [SerializeField]
@@ -63,10 +64,12 @@ public class Lobby_Controller : MonoBehaviourPunCallbacks
 
     public void updateList()
     {
-        for (int i = 0; i >= PhotonNetwork.PlayerList.Length; i++)
+        for (int i = 0; i == PhotonNetwork.PlayerList.Length-1; i++)
         {
-            GameObject temp = Instantiate(PlayerListPrefab, PlayerList.transform);
-            temp.GetComponentInChildren<Text>().text = PhotonNetwork.PlayerList[i].NickName;
+            string nickname = PhotonNetwork.PlayerList[i].NickName;
+            Debug.Log(nickname);
+            GameObject temp = Instantiate(PlayerListPrefab, PlayerLists.GetChild(i));            
+            temp.GetComponentInChildren<Text>().text = nickname;
         }
     }
 
@@ -83,7 +86,7 @@ public class Lobby_Controller : MonoBehaviourPunCallbacks
         for(int i = 0; i < roomList.Count; i++)
         {
             RoomInfo info = roomList[i];
-            if (info.RemovedFromList)
+            if ((info.RemovedFromList)||(info.PlayerCount ==0 ))
             {
                 cachedRoomList.Remove(info.Name);
             }
@@ -97,6 +100,8 @@ public class Lobby_Controller : MonoBehaviourPunCallbacks
     public void leaveRoom()
     {
         PhotonNetwork.LeaveRoom();
+        RemoveAllPlayerNames();
+        updateList();
         RoomPanel.SetActive(false);
         LobbyPanel.SetActive(true);
     }
@@ -108,31 +113,68 @@ public class Lobby_Controller : MonoBehaviourPunCallbacks
         RoomPanel.SetActive(false);
     }
 
-    public void CreateRoomJoin(string RoomInfo)
+    public void CreateRoomJoin(string RoomInfo, int i)
     {
         string[] RoomInfoSplit = RoomInfo.Split(' ');
         string roomname = RoomInfoSplit[0] + " " + RoomInfoSplit[1];
         string players = RoomInfoSplit[4] + " " + RoomInfoSplit[3];
-        GameObject temp = Instantiate(RoomListPrefab, RoomList.transform);
+        GameObject temp = Instantiate(RoomListPrefab, RoomList.GetChild(i));
         temp.GetComponentInChildren<Text>().text = roomname + " " + players;
+    }
+
+    public void RemoveAllPlayerNames()
+    {
+        for (int i = 0; i <= PlayerLists.childCount; i++)
+        {
+            Transform temp = PlayerLists.GetChild(i);
+            if (temp.childCount == 0)
+            {
+                return;
+            }
+            else
+            {
+                Destroy(temp.GetChild(0).gameObject);
+            }
+        }
     }
 
     public void RemoveAllRooms()
     {
-        while (RoomList.transform.childCount > 0)
+        for (int i = RoomList.childCount - 1; i >= 0; i--) 
         {
-            GameObject.Destroy(RoomList.transform.GetChild(0));
+            Transform temp = RoomList.GetChild(i);
+            if(temp.childCount== 0)
+            {
+                return;
+            }
+            else
+            {
+                Destroy(temp.GetChild(0).gameObject);
+            } 
         }
     }
 
-    #region overrides
-    public override void OnJoinedLobby()
+    public void refreshPlayerList()
+    {
+        for (int i = 0; i == PhotonNetwork.PlayerList.Length - 1; i++)
+        {
+            string nickname = PhotonNetwork.PlayerList[i].NickName;
+            Debug.Log(nickname);
+        }
+        RemoveAllPlayerNames();    
+        updateList();
+    }
+
+#region overrides
+public override void OnJoinedLobby()
     {
         Debug.Log("OnJoinedLobby() called by PUN. Now this client is in the lobby.");
     }
 
     public override void OnJoinedRoom()
     {
+        RemoveAllPlayerNames();
+        updateList();
         if (PhotonNetwork.IsMasterClient)
         { 
             RoomNameHeaderID.GetComponent<Text>().text = PhotonNetwork.CurrentRoom.Name;
@@ -145,8 +187,9 @@ public class Lobby_Controller : MonoBehaviourPunCallbacks
             RoomPanel.SetActive(true);
             StartButton.SetActive(false);            
         }
+        
     }
-
+    
     public override void OnCreatedRoom()
     {
         Debug.Log("OnJoinedRoom() called by PUN. Now this client is in a room.");
@@ -168,12 +211,17 @@ public class Lobby_Controller : MonoBehaviourPunCallbacks
         if (roomList.Count > 0)
         {
             RemoveAllRooms();
-            for (int i = 0; i <= roomList.Count; i++)
+            for (int i = 0; i <= roomList.Count-1; i++)
             {
-                Debug.Log(roomList[0]);
-                CreateRoomJoin(roomList[i].ToString());
+                Debug.Log(roomList[i]);
+                CreateRoomJoin(roomList[i].ToString(), i);
             }
         }
+    }
+
+    public override void OnConnectedToMaster()
+    {
+        PhotonNetwork.AutomaticallySyncScene = true;
     }
     #endregion
 }

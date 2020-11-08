@@ -4,8 +4,6 @@ ScriptsOnlyBuild:
     - Lobby_Controller
     - PlayerName
     - Room_Controller
-    PhotonUnityNetworking.Editor.dll:
-    - Photon.Pun.PunSceneSettings
     PhotonUnityNetworking.dll:
     - Photon.Pun.ServerSettings
     Unity.Rider.Editor.dll:
@@ -22,7 +20,6 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.GraphicRaycaster
     - UnityEngine.UI.Image
     - UnityEngine.UI.InputField
-    - UnityEngine.UI.ScrollRect
     - UnityEngine.UI.Text
   sceneClasses:
     Assets/Scenes/Launcher.unity:
@@ -54,8 +51,6 @@ ScriptsOnlyBuild:
       Script: {instanceID: 11390}
     - Class: 114
       Script: {instanceID: 11816}
-    - Class: 114
-      Script: {instanceID: 12022}
     - Class: 114
       Script: {instanceID: 12064}
     - Class: 114
@@ -450,7 +445,7 @@ ScriptsOnlyBuild:
     className: PlayerName
   - hash:
       serializedVersion: 2
-      Hash: f40e6f985672ad5c1654d4c460d9a8c4
+      Hash: 3a916950c3bad4f6a0302410c61ef96d
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Lobby_Controller
