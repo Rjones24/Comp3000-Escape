@@ -21,9 +21,9 @@ public class Lobby_Controller : MonoBehaviourPunCallbacks
     [SerializeField]
     public GameObject LobbyPanel;
     [SerializeField]
-    public GameObject RoomPanel;
+    public GameObject Connecting;
     [SerializeField]
-    public GameObject StartButton;
+    public GameObject JoinButton;
     [SerializeField]
     public InputField RoomNameID;
     [SerializeField]
@@ -33,17 +33,8 @@ public class Lobby_Controller : MonoBehaviourPunCallbacks
     [SerializeField]
     public Transform RoomList;
     [SerializeField]
-    public Transform PlayerLists;
-    [SerializeField]
     public GameObject RoomListPrefab;
-    [SerializeField]
-    public GameObject PlayerListPrefab;
     #endregion
-
-    private void Awake()
-    {
-        PhotonNetwork.AutomaticallySyncScene = true;
-    }
 
     void Start()
     {
@@ -51,7 +42,6 @@ public class Lobby_Controller : MonoBehaviourPunCallbacks
         PhotonNetwork.GameVersion = gameVersion;
         NamePanel.SetActive(true);
         LobbyPanel.SetActive(false);
-        RoomPanel.SetActive(false);
     }
 
     public void JoinLobby()
@@ -62,23 +52,9 @@ public class Lobby_Controller : MonoBehaviourPunCallbacks
         LobbyPanel.SetActive(true);
     }
 
-    public void updateList()
-    {
-        for (int i = 0; i == PhotonNetwork.PlayerList.Length-1; i++)
-        {
-            string nickname = PhotonNetwork.PlayerList[i].NickName;
-            Debug.Log(nickname);
-            GameObject temp = Instantiate(PlayerListPrefab, PlayerLists.GetChild(i));            
-            temp.GetComponentInChildren<Text>().text = nickname;
-        }
-    }
-
     public void CreateRoom()
     {
         PhotonNetwork.CreateRoom(RoomNameID.text, new RoomOptions { MaxPlayers = MaxplayersPerRoom });
-        RoomNameHeaderID.GetComponent<Text>().text = RoomNameID.text;
-        LobbyPanel.SetActive(false);
-        RoomPanel.SetActive(true);
     }
 
     private void UpdateCachedRoomList(List<RoomInfo> roomList)
@@ -97,20 +73,11 @@ public class Lobby_Controller : MonoBehaviourPunCallbacks
         }
     }
 
-    public void leaveRoom()
-    {
-        PhotonNetwork.LeaveRoom();
-        RemoveAllPlayerNames();
-        updateList();
-        RoomPanel.SetActive(false);
-        LobbyPanel.SetActive(true);
-    }
     public void leaveLobby()
     {
         PhotonNetwork.LeaveLobby();
         NamePanel.SetActive(true);
         LobbyPanel.SetActive(false);
-        RoomPanel.SetActive(false);
     }
 
     public void CreateRoomJoin(string RoomInfo, int i)
@@ -120,23 +87,7 @@ public class Lobby_Controller : MonoBehaviourPunCallbacks
         string players = RoomInfoSplit[4] + " " + RoomInfoSplit[3];
         GameObject temp = Instantiate(RoomListPrefab, RoomList.GetChild(i));
         temp.GetComponentInChildren<Text>().text = roomname + " " + players;
-    }
-
-    public void RemoveAllPlayerNames()
-    {
-        for (int i = 0; i <= PlayerLists.childCount; i++)
-        {
-            Transform temp = PlayerLists.GetChild(i);
-            if (temp.childCount == 0)
-            {
-                return;
-            }
-            else
-            {
-                Destroy(temp.GetChild(0).gameObject);
-            }
-        }
-    }
+    } 
 
     public void RemoveAllRooms()
     {
@@ -154,40 +105,10 @@ public class Lobby_Controller : MonoBehaviourPunCallbacks
         }
     }
 
-    public void refreshPlayerList()
-    {
-        for (int i = 0; i == PhotonNetwork.PlayerList.Length - 1; i++)
-        {
-            string nickname = PhotonNetwork.PlayerList[i].NickName;
-            Debug.Log(nickname);
-        }
-        RemoveAllPlayerNames();    
-        updateList();
-    }
-
 #region overrides
 public override void OnJoinedLobby()
     {
         Debug.Log("OnJoinedLobby() called by PUN. Now this client is in the lobby.");
-    }
-
-    public override void OnJoinedRoom()
-    {
-        RemoveAllPlayerNames();
-        updateList();
-        if (PhotonNetwork.IsMasterClient)
-        { 
-            RoomNameHeaderID.GetComponent<Text>().text = PhotonNetwork.CurrentRoom.Name;
-            RoomPanel.SetActive(true);
-            StartButton.SetActive(true);           
-        }
-        else
-        {
-            RoomNameHeaderID.GetComponent<Text>().text = PhotonNetwork.CurrentRoom.Name;
-            RoomPanel.SetActive(true);
-            StartButton.SetActive(false);            
-        }
-        
     }
     
     public override void OnCreatedRoom()
@@ -195,10 +116,6 @@ public override void OnJoinedLobby()
         Debug.Log("OnJoinedRoom() called by PUN. Now this client is in a room.");
     }
 
-    public override void OnJoinRoomFailed(short returnCode, string message)
-    {
-        Debug.Log("faild to join room");
-    }
 
     public override void OnCreateRoomFailed(short returnCode, string message)
     {
@@ -222,6 +139,8 @@ public override void OnJoinedLobby()
     public override void OnConnectedToMaster()
     {
         PhotonNetwork.AutomaticallySyncScene = true;
+        Connecting.SetActive(false);
+        JoinButton.SetActive(true);
     }
     #endregion
 }

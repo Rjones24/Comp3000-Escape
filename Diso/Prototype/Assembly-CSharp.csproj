@@ -63,11 +63,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\JoinRoomButton.cs" />
     <Compile Include="Assets\Scripts\Lobby_Controller.cs" />
     <Compile Include="Assets\Scripts\PlayerName.cs" />
     <Compile Include="Assets\Scripts\Player_Look.cs" />
     <Compile Include="Assets\Scripts\Player_Movement.cs" />
-    <Compile Include="Assets\Scripts\RoomPlayerList.cs" />
     <Compile Include="Assets\Scripts\Room_Controller.cs" />
     <None Include="Assets\Photon\PhotonLibs\netstandard2.0\Photon3Unity3D.xml" />
     <None Include="Assets\Photon\PhotonUnityNetworking\changelog.txt" />

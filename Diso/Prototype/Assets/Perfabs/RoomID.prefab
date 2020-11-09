@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4200110405052768800}
   - component: {fileID: 4200110405052768801}
   - component: {fileID: 4200110405052768806}
-  - component: {fileID: 9057292663932229557}
+  - component: {fileID: -4956513175426474270}
   m_Layer: 5
   m_Name: RoomID
   m_TagString: Untagged
@@ -120,7 +120,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 9057292663932229557}
+      - m_Target: {fileID: -4956513175426474270}
         m_MethodName: JoinRoom
         m_Mode: 1
         m_Arguments:
@@ -131,7 +131,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &9057292663932229557
+--- !u!114 &-4956513175426474270
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -140,7 +140,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4200110405052768804}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 98647f30ab5605e46b2fbb8b3528760c, type: 3}
+  m_Script: {fileID: 11500000, guid: 9f149462ae37ad84ebf1ec29ed5cb966, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   LobbyPanel: {fileID: 0}
