@@ -4,6 +4,7 @@ using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine.UI;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class Room_Controller : MonoBehaviourPunCallbacks
 {
@@ -88,21 +89,18 @@ public class Room_Controller : MonoBehaviourPunCallbacks
         StartCoroutine(RejoinJLobby()); 
     }
 
+    public void startGame()
+    {
+        SceneManager.LoadScene(1);
+    }
+
     public void updateList()
     {
-        
         for(int i=0; i<= PhotonNetwork.PlayerList.Length - 1; i++)
         {
             string nickname = PhotonNetwork.PlayerList[i].NickName;
             GameObject temp = Instantiate(PlayerListPrefab, PlayerLists.GetChild(i));
             temp.GetComponentInChildren<Text>().text = nickname;
         }
-
-       /* foreach(Player player in PhotonNetwork.PlayerList) {
-            int i = 0;
-            string nickname = player.NickName;
-            GameObject temp = Instantiate(PlayerListPrefab, PlayerLists.GetChild(i++));
-            temp.GetComponentInChildren<Text>().text = nickname;
-        }*/
     }
 }
