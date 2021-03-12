@@ -632,12 +632,7 @@
       <HintPath>C:/Users/Ryan/Documents/GitHub/Comp3000/Diso/Prototype/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
     </Reference>
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="PhotonWebSocket.csproj">
-      <Project>{D7F0263A-644A-FA9C-7990-0E17F8D66FAC}</Project>
-      <Name>PhotonWebSocket</Name>
-    </ProjectReference>
-  </ItemGroup>
+  <ItemGroup></ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

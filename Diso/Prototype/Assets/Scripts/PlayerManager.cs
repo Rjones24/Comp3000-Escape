@@ -9,12 +9,23 @@ public class PlayerManager : MonoBehaviourPunCallbacks
     [Tooltip("the local player instance")]
     public static GameObject LocalPlayerInatance;
 
+    [Tooltip("The Player's name GameObject Prefab")]
     [SerializeField]
-    private GameObject playerUiPrefab;
+    public GameObject PlayerUiPrefab;
 
     void Start()
     {
         UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnSceneLoaded;
+
+        if (PlayerUiPrefab != null)
+        {
+            GameObject _uiGo = Instantiate(PlayerUiPrefab);
+            _uiGo.SendMessage("SetTarget", this, SendMessageOptions.RequireReceiver);
+        }
+        else
+        {
+            Debug.LogWarning("<Color=Red><a>Missing</a></Color> PlayerUiPrefab reference on player Prefab.", this);
+        }
     }
 
     void OnSceneLoaded(UnityEngine.SceneManagement.Scene scene, UnityEngine.SceneManagement.LoadSceneMode loadingMode)
@@ -29,6 +40,7 @@ public class PlayerManager : MonoBehaviourPunCallbacks
         {
             transform.position = new Vector3(0f, 5f, 0f);
         }
+        
     }
 
     public override void OnDisable()
@@ -42,12 +54,14 @@ public class PlayerManager : MonoBehaviourPunCallbacks
     {
 
     }
+   
 
     void Awake()
     {
         if (photonView.IsMine)
         {
             PlayerManager.LocalPlayerInatance = this.gameObject;
+
         }
         DontDestroyOnLoad(this.gameObject);
     }

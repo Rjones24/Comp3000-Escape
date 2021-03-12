@@ -32,12 +32,12 @@ public class Player_Look : MonoBehaviourPunCallbacks
             float mouseY = Input.GetAxis("Mouse Y") * MouseSpeed * Time.deltaTime;
 
             this.XRotation -= mouseY;
-            this.XRotation = Mathf.Clamp(XRotation, -45.0f, 45.0f);
+            this.XRotation = Mathf.Clamp(XRotation, -135.0f, -35.0f );
 
             this.YRotation -= mouseX;
-            this.YRotation = Mathf.Clamp(YRotation, -10.0f, 10.0f);
 
-            this.playerHead.transform.localRotation = Quaternion.Euler(XRotation, -YRotation, 0.0f);
+            this.playerBody.transform.localRotation = Quaternion.Euler(0.0f , -YRotation, 0.0f);
+            this.playerHead.transform.localRotation = Quaternion.Euler(XRotation, 0.0f, 0.0f);
         }
     }
 }

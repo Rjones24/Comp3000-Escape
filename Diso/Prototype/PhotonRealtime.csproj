@@ -66,6 +66,7 @@
   <ItemGroup>
     <Compile Include="Assets\Photon\PhotonRealtime\Code\AppSettings.cs" />
     <Compile Include="Assets\Photon\PhotonRealtime\Code\ConnectionHandler.cs" />
+    <Compile Include="Assets\Photon\PhotonRealtime\Code\CustomTypesUnity.cs" />
     <Compile Include="Assets\Photon\PhotonRealtime\Code\Extensions.cs" />
     <Compile Include="Assets\Photon\PhotonRealtime\Code\FriendInfo.cs" />
     <Compile Include="Assets\Photon\PhotonRealtime\Code\LoadBalancingClient.cs" />
@@ -78,6 +79,7 @@
     <Compile Include="Assets\Photon\PhotonRealtime\Code\Room.cs" />
     <Compile Include="Assets\Photon\PhotonRealtime\Code\RoomInfo.cs" />
     <Compile Include="Assets\Photon\PhotonRealtime\Code\SupportLogger.cs" />
+    <Compile Include="Assets\Photon\PhotonRealtime\Code\Unity\PhotonAppSettings.cs" />
     <Compile Include="Assets\Photon\PhotonRealtime\Code\WebRpc.cs" />
     <None Include="Assets\Photon\PhotonRealtime\Code\changes-realtime.txt" />
     <None Include="Assets\Photon\PhotonRealtime\Code\PhotonRealtime.asmdef" />
@@ -634,12 +636,7 @@
       <HintPath>C:/Users/Ryan/Documents/GitHub/Comp3000/Diso/Prototype/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
     </Reference>
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="PhotonWebSocket.csproj">
-      <Project>{D7F0263A-644A-FA9C-7990-0E17F8D66FAC}</Project>
-      <Name>PhotonWebSocket</Name>
-    </ProjectReference>
-  </ItemGroup>
+  <ItemGroup></ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

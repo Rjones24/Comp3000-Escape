@@ -9,9 +9,9 @@ public class Lobby_Controller : MonoBehaviourPunCallbacks
 {
     string gameVersion = "1";
 
-    [Tooltip("the maximum players per room is 4")]
+    [Tooltip("the maximum players per room is 2")]
     [SerializeField]
-    private byte MaxplayersPerRoom = 4;
+    private byte MaxplayersPerRoom = 2;
    
     private Dictionary<string, RoomInfo> cachedRoomList = new Dictionary<string, RoomInfo>();
 

@@ -17,10 +17,8 @@ public class GameManager : MonoBehaviourPunCallbacks
     static public GameManager Instance;
     void Start()
     {
-        Spawn.Add(new Vector3(0f, 5f, 0f));
-        Spawn.Add(new Vector3(10f, 5f, 10f)); 
-        Spawn.Add(new Vector3(15f, 5f, 0f));
-        Spawn.Add(new Vector3(15f, 5f, 15f));
+        Spawn.Add(new Vector3(-2.5f, 1.5f, 0f));
+        Spawn.Add(new Vector3(-45f, 1.5f, 0f)); 
         Instance = this;
 
         if (playerPrefab == null)
@@ -51,8 +49,6 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     private void Update()
     {
-
-
         if (win)
         {
             winstate();
