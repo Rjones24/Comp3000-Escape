@@ -56,18 +56,6 @@ public class GameManager : MonoBehaviourPunCallbacks
         }
     }
 
-
-    void LoadArena()
-    {
-        if (!PhotonNetwork.IsMasterClient)
-        {
-            Debug.LogError("PhotonNetwork : trying to load a level but we are not the master");
-
-        }
-        Debug.LogFormat("Photon: Loading level : {0}", PhotonNetwork.CurrentRoom.PlayerCount);
-        PhotonNetwork.LoadLevel("Room for " + PhotonNetwork.CurrentRoom.PlayerCount);
-    }
-
     public void winstate()
     {
         SceneManager.LoadScene("Win", LoadSceneMode.Single);

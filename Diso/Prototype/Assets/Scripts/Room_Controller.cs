@@ -83,10 +83,12 @@ public class Room_Controller : MonoBehaviourPunCallbacks
     public void leaveRoom()
     {
         RoomPanel.SetActive(false);
-        LobbyPanel.SetActive(true);
+      
         PhotonNetwork.LeaveRoom();
         PhotonNetwork.LeaveLobby();
-        StartCoroutine(RejoinJLobby()); 
+        StartCoroutine(RejoinJLobby());
+
+        LobbyPanel.SetActive(true);
     }
 
     public void startGame()

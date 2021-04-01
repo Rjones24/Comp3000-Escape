@@ -36,8 +36,6 @@ public class UserNameDisplay : MonoBehaviourPunCallbacks
 
     void LateUpdate()
     {
-        // #Critical
-        // Follow the Target GameObject on screen.
         if (targetTransform != null)
         {
             targetPosition = targetTransform.position;
@@ -62,5 +60,6 @@ public class UserNameDisplay : MonoBehaviourPunCallbacks
             Destroy(this.gameObject);
             return;
         }
+     
     }
 }

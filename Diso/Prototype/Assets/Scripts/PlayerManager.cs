@@ -13,6 +13,9 @@ public class PlayerManager : MonoBehaviourPunCallbacks
     [SerializeField]
     public GameObject PlayerUiPrefab;
 
+    [SerializeField]
+    public GameObject hands;
+
     void Start()
     {
         UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnSceneLoaded;
@@ -49,19 +52,14 @@ public class PlayerManager : MonoBehaviourPunCallbacks
         UnityEngine.SceneManagement.SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-   
-
     void Awake()
     {
         if (photonView.IsMine)
         {
             PlayerManager.LocalPlayerInatance = this.gameObject;
 
+            var ItemPickup = GameObject.FindWithTag("Pickups");
+            ItemPickup.SendMessage("PLayersPos", this.hands, SendMessageOptions.RequireReceiver);
         }
         DontDestroyOnLoad(this.gameObject);
     }

@@ -7,21 +7,19 @@ public class PickUp : MonoBehaviourPunCallbacks
 {
 
     Vector3 objectpos;
-    float distance;
 
     public bool canHold = true;
     public GameObject item;
     public bool isHolding = false;
 
-    private Hands target;
+    private GameObject target;
 
     bool firstPick = true;
 
     Transform targetTransform;
     Vector3 targetPosition;
-    Quaternion targetRotation;
 
-    public void PLayersPos(Hands _target)
+    public void PLayersPos(GameObject _target)
     {
         if (_target == null)
         {
@@ -31,7 +29,7 @@ public class PickUp : MonoBehaviourPunCallbacks
         // Cache references for efficiency
         target = _target;
        
-        targetTransform = this.target.GetComponent<Transform>();
+        targetTransform = target.GetComponent<Transform>();
 
     }
 
@@ -39,11 +37,11 @@ public class PickUp : MonoBehaviourPunCallbacks
     {
         item.transform.SetParent(GameObject.Find("PhotonMono").GetComponent<Transform>(), false);
     }
+
     // Update is called once per frame
     void LateUpdate()
     {
         
-
         if (isHolding == true)
         {
             if (firstPick)
@@ -59,8 +57,6 @@ public class PickUp : MonoBehaviourPunCallbacks
                 targetPosition = targetTransform.position;
                 this.transform.position = targetPosition;
 
-               // targetRotation = targetTransform.rotation;
-               // this.transform.rotation = targetRotation;
             }
 
         }

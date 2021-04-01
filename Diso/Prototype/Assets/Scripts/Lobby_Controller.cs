@@ -62,7 +62,7 @@ public class Lobby_Controller : MonoBehaviourPunCallbacks
         for(int i = 0; i < roomList.Count; i++)
         {
             RoomInfo info = roomList[i];
-            if ((info.RemovedFromList)||(info.PlayerCount ==0 ))
+            if ((info.RemovedFromList)||(info.PlayerCount == 0 ))
             {
                 cachedRoomList.Remove(info.Name);
             }

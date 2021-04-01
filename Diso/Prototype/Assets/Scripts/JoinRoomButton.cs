@@ -10,7 +10,7 @@ public class JoinRoomButton : MonoBehaviour
 {
     
     [SerializeField]
-    Transform LobbyPanel;
+    private Transform LobbyPanel;
     string roomname;
 
     public void JoinRoom()
