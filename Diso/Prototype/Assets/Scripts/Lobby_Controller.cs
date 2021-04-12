@@ -3,7 +3,6 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine.UI;
-using System.Reflection;
 
 public class Lobby_Controller : MonoBehaviourPunCallbacks
 {
@@ -12,29 +11,39 @@ public class Lobby_Controller : MonoBehaviourPunCallbacks
     [Tooltip("the maximum players per room is 2")]
     [SerializeField]
     private byte MaxplayersPerRoom = 2;
-   
-    private Dictionary<string, RoomInfo> cachedRoomList = new Dictionary<string, RoomInfo>();
+
+    [Header("Room List Panel")]
+    [SerializeField]
+    public GameObject LobbyPanel;
+
+    public GameObject RoomListContent;
+    public GameObject RoomListEntryPrefab;
+
+    private Dictionary<string, RoomInfo> cachedRoomList;
+    private Dictionary<string, GameObject> roomListEntries;
 
     #region gameobjects
     [SerializeField]
     public GameObject NamePanel;
     [SerializeField]
-    public GameObject LobbyPanel;
-    [SerializeField]
     public GameObject Connecting;
     [SerializeField]
     public GameObject JoinButton;
+    public GameObject Invalid;
     [SerializeField]
     public InputField RoomNameID;
     [SerializeField]
     public GameObject RoomNameHeaderID;
     [SerializeField]
     public InputField NameID;
-    [SerializeField]
-    public Transform RoomList;
-    [SerializeField]
-    public GameObject RoomListPrefab;
     #endregion
+
+    public void Awake()
+    {
+        PhotonNetwork.AutomaticallySyncScene = true;
+        cachedRoomList = new Dictionary<string, RoomInfo>();
+        roomListEntries = new Dictionary<string, GameObject>();
+    }
 
     void Start()
     {
@@ -46,10 +55,21 @@ public class Lobby_Controller : MonoBehaviourPunCallbacks
 
     public void JoinLobby()
     {
-        PhotonNetwork.NickName = NameID.text;
-        PhotonNetwork.JoinLobby();
-        NamePanel.SetActive(false);
-        LobbyPanel.SetActive(true);
+           string playerName = NameID.text;
+
+        if (!playerName.Equals(""))
+        {
+            PhotonNetwork.LocalPlayer.NickName = playerName;
+            PhotonNetwork.JoinLobby();
+            NamePanel.SetActive(false);
+            LobbyPanel.SetActive(true);
+        }
+        else
+        {
+            Invalid.SetActive(true);
+            //Debug.LogError("Player Name is invalid.");
+        }
+      
     }
 
     public void CreateRoom()
@@ -59,86 +79,89 @@ public class Lobby_Controller : MonoBehaviourPunCallbacks
 
     private void UpdateCachedRoomList(List<RoomInfo> roomList)
     {
-        for(int i = 0; i < roomList.Count; i++)
+        foreach (RoomInfo info in roomList)
         {
-            RoomInfo info = roomList[i];
-            if ((info.RemovedFromList)||(info.PlayerCount == 0 ))
+            // Remove room from cached room list if it got closed, became invisible or was marked as removed
+            if (!info.IsOpen || !info.IsVisible || info.RemovedFromList)
             {
-                cachedRoomList.Remove(info.Name);
+                if (cachedRoomList.ContainsKey(info.Name))
+                {
+                    cachedRoomList.Remove(info.Name);
+                }
+
+                continue;
             }
-            else
+            if (cachedRoomList.ContainsKey(info.Name))
             {
                 cachedRoomList[info.Name] = info;
             }
+            else
+            {
+                cachedRoomList.Add(info.Name, info);
+            }
         }
+    }
+
+    private void ClearRoomListView()
+    {
+        foreach (GameObject entry in roomListEntries.Values)
+        {
+            Destroy(entry.gameObject);
+        }
+
+        roomListEntries.Clear();
     }
 
     public void leaveLobby()
     {
-        PhotonNetwork.LeaveLobby();
+        cachedRoomList.Clear();
+        ClearRoomListView();
         NamePanel.SetActive(true);
         LobbyPanel.SetActive(false);
-    }
-
-    public void CreateRoomJoin(string RoomInfo, int i)
-    {
-        string[] RoomInfoSplit = RoomInfo.Split(' ');
-        string roomname = RoomInfoSplit[0] + " " + RoomInfoSplit[1];
-        string players = RoomInfoSplit[4] + " " + RoomInfoSplit[3];
-        GameObject temp = Instantiate(RoomListPrefab, RoomList.GetChild(i));
-        temp.GetComponentInChildren<Text>().text = roomname + " " + players;
-    } 
-
-    public void RemoveAllRooms()
-    {
-        for (int i = RoomList.childCount - 1; i >= 0; i--) 
-        {
-            Transform temp = RoomList.GetChild(i);
-            if(temp.childCount== 0)
-            {
-                return;
-            }
-            else
-            {
-                Destroy(temp.GetChild(0).gameObject);
-            } 
-        }
     }
 
 #region overrides
 public override void OnJoinedLobby()
     {
-        Debug.Log("OnJoinedLobby() called by PUN. Now this client is in the lobby.");
+        cachedRoomList.Clear();
+        ClearRoomListView();
+      //  Debug.Log("OnJoinedLobby() called by PUN. Now this client is in the lobby.");
     }
     
     public override void OnCreatedRoom()
     {
-        Debug.Log("OnJoinedRoom() called by PUN. Now this client is in a room.");
+       //Debug.Log("OnJoinedRoom() called by PUN. Now this client is in a room.");
     }
 
 
     public override void OnCreateRoomFailed(short returnCode, string message)
     {
-        Debug.Log("faild to create room");
+      //  Debug.Log("faild to create room");
     }
 
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
     {
+        ClearRoomListView();
+
         UpdateCachedRoomList(roomList);
-        if (roomList.Count > 0)
+        UpdateRoomListView();
+    }
+
+    private void UpdateRoomListView()
+    {
+        foreach (RoomInfo info in cachedRoomList.Values)
         {
-            RemoveAllRooms();
-            for (int i = 0; i <= roomList.Count-1; i++)
-            {
-                Debug.Log(roomList[i]);
-                CreateRoomJoin(roomList[i].ToString(), i);
-            }
+            GameObject entry = Instantiate(RoomListEntryPrefab);
+            entry.transform.SetParent(RoomListContent.transform);
+            entry.transform.localScale = Vector3.one;
+            entry.GetComponent<RoomListEntry>().Initialize(info.Name, (byte)info.PlayerCount, info.MaxPlayers);
+
+            roomListEntries.Add(info.Name, entry);
         }
     }
 
     public override void OnConnectedToMaster()
     {
-        PhotonNetwork.AutomaticallySyncScene = true;
         Connecting.SetActive(false);
         JoinButton.SetActive(true);
     }

@@ -8,6 +8,8 @@ public class PickUp : MonoBehaviourPunCallbacks
 
     Vector3 objectpos;
 
+   public  float dist = 0.0f;
+
     public bool canHold = true;
     public GameObject item;
     public bool isHolding = false;
@@ -15,6 +17,10 @@ public class PickUp : MonoBehaviourPunCallbacks
     private GameObject target;
 
     bool firstPick = true;
+
+    public float DistanceToGround = 0.4f;
+    public LayerMask groundMask;
+    bool Grounded;
 
     Transform targetTransform;
     Vector3 targetPosition;
@@ -38,38 +44,52 @@ public class PickUp : MonoBehaviourPunCallbacks
         item.transform.SetParent(GameObject.Find("PhotonMono").GetComponent<Transform>(), false);
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        isHolding = false;
+        firstPick = true;
+    }
+
     // Update is called once per frame
     void LateUpdate()
     {
-        
-        if (isHolding == true)
-        {
-            if (firstPick)
+            if (isHolding == true)
             {
-                firstPickup();
-                firstPick = false;
-            }
-            GetComponent<Rigidbody>().useGravity = false;
-            GetComponent<Rigidbody>().detectCollisions = true;
+                if (firstPick)
+                {
+                    firstPickup();
+                    firstPick = false;
+                }
+                GetComponent<Rigidbody>().useGravity = false;
+                GetComponent<Rigidbody>().detectCollisions = true;
 
-            if (targetTransform != null)
+                if (targetTransform != null)
+                {
+                    targetPosition = targetTransform.position;
+                    this.transform.position = targetPosition;
+
+                }
+
+            }
+            else
             {
-                targetPosition = targetTransform.position;
-                this.transform.position = targetPosition;
-
+                objectpos = item.transform.position;
+                item.transform.SetParent(null);
+                item.GetComponent<Rigidbody>().useGravity = true;
+                item.transform.position = objectpos;
             }
-
-        }
-        else
-        {
-            objectpos = item.transform.position;
-            item.transform.SetParent(null);
-            item.GetComponent<Rigidbody>().useGravity = true;
-            item.transform.position = objectpos;
-        }
     }
     void Update()
     {
+        Grounded = Physics.CheckSphere(transform.position, DistanceToGround, groundMask);
+        if (Grounded)
+        {
+            dist = 2.5f;
+        }
+        else
+        {
+            dist = 0.1f;
+        }
         if (target == null)
         {
             Destroy(this.gameObject);
@@ -78,7 +98,11 @@ public class PickUp : MonoBehaviourPunCallbacks
     }
     void OnMouseDown()
     {
-        isHolding = true;
+        if (dist > Vector3.Distance(target.transform.position, transform.position))
+        {
+            isHolding = true;
+            base.photonView.RequestOwnership();
+        }
 
     }
     void OnMouseUp()

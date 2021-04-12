@@ -58,8 +58,22 @@ public class PlayerManager : MonoBehaviourPunCallbacks
         {
             PlayerManager.LocalPlayerInatance = this.gameObject;
 
-            var ItemPickup = GameObject.FindWithTag("Pickups");
-            ItemPickup.SendMessage("PLayersPos", this.hands, SendMessageOptions.RequireReceiver);
+            var ItemPickup = GameObject.FindGameObjectsWithTag("Pickups");
+            for (int i = 0; i < ItemPickup.Length; i++)
+            {
+                ItemPickup[i].SendMessage("PLayersPos", this.hands, SendMessageOptions.RequireReceiver);
+            }
+            var CardPickup = GameObject.FindGameObjectsWithTag("Card");
+            for (int j = 0; j < CardPickup.Length; j++)
+            {
+                CardPickup[j].SendMessage("PLayersPos", this.hands, SendMessageOptions.RequireReceiver);
+            }
+            var KeyPickup = GameObject.FindGameObjectsWithTag("key");
+            for (int j = 0; j < KeyPickup.Length; j++)
+            {
+                KeyPickup[j].SendMessage("PLayersPos", this.hands, SendMessageOptions.RequireReceiver);
+            }
+
         }
         DontDestroyOnLoad(this.gameObject);
     }

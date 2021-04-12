@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Player_Look : MonoBehaviourPunCallbacks
 {
-    public float MouseSpeed = 100.0f;
+    public float MouseSpeed = 50.0f;
 
     public Transform playerBody;
     public Transform playerHead;

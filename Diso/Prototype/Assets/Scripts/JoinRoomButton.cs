@@ -6,7 +6,7 @@ using UnityEngine.UI;
 using System.Collections;
 
 
-public class JoinRoomButton : MonoBehaviour
+public class JoinRoomButton : MonoBehaviourPunCallbacks
 {
     
     [SerializeField]
@@ -15,6 +15,11 @@ public class JoinRoomButton : MonoBehaviour
 
     public void JoinRoom()
     {
+        if (PhotonNetwork.InLobby)
+        {
+            PhotonNetwork.LeaveLobby();
+        }
+
         LobbyPanel = this.transform.parent;
         LobbyPanel = LobbyPanel.transform.parent;
         LobbyPanel = LobbyPanel.transform.parent;

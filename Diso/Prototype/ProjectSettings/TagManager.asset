@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Pickups
   - SpawnDoor
+  - Card
+  - key
+  - Room
   layers:
   - Default
   - TransparentFX

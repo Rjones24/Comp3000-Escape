@@ -8,7 +8,7 @@ public class UserNameDisplay : MonoBehaviourPunCallbacks
 
     [Tooltip("Text to display Player's Name")]
     [SerializeField]
-    private TextMesh playerUiPrefab;
+    TextMesh playerUiPrefab;
 
     Transform targetTransform;
     Vector3 targetPosition;

@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     static public GameManager Instance;
     void Start()
     {
+        Cursor.visible = true;
         Spawn.Add(new Vector3(-2.5f, 1.5f, 0f));
         Spawn.Add(new Vector3(-45f, 1.5f, 0f)); 
         Instance = this;

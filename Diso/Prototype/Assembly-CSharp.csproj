@@ -76,16 +76,21 @@
     <Compile Include="Assets\Photon\PhotonChat\Demos\DemoChat\IgnoreUiRaycastWhenInactive.cs" />
     <Compile Include="Assets\Photon\PhotonChat\Demos\DemoChat\NamePickGui.cs" />
     <Compile Include="Assets\Photon\PhotonRealtime\Demos\DemoLoadBalancing\ConnectAndJoinRandomLb.cs" />
+    <Compile Include="Assets\Scripts\Cabinet_unlock.cs" />
     <Compile Include="Assets\Scripts\CardSwipe.cs" />
+    <Compile Include="Assets\Scripts\CardSwipe_2.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\JoinRoomButton.cs" />
     <Compile Include="Assets\Scripts\Lobby_Controller.cs" />
     <Compile Include="Assets\Scripts\Open_Door.cs" />
+    <Compile Include="Assets\Scripts\Open_On_Click.cs" />
     <Compile Include="Assets\Scripts\PickUp.cs" />
+    <Compile Include="Assets\Scripts\PlayerListEntity.cs" />
     <Compile Include="Assets\Scripts\PlayerManager.cs" />
     <Compile Include="Assets\Scripts\PlayerName.cs" />
     <Compile Include="Assets\Scripts\Player_Look.cs" />
     <Compile Include="Assets\Scripts\Player_Movement.cs" />
+    <Compile Include="Assets\Scripts\RoomListEntry.cs" />
     <Compile Include="Assets\Scripts\Room_Controller.cs" />
     <Compile Include="Assets\Scripts\UserNameDisplay.cs" />
     <Compile Include="Assets\Scripts\Win_State.cs" />
@@ -696,14 +701,6 @@
     <ProjectReference Include="PhotonUnityNetworking.Utilities.PhotonPlayer.Editor.csproj">
       <Project>{277FC3C7-29DF-52B4-138D-B30DBC7766F2}</Project>
       <Name>PhotonUnityNetworking.Utilities.PhotonPlayer.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="PunDemos.DemoHubEditor.csproj">
-      <Project>{91A372BF-7748-6CAF-E216-2933995D87F9}</Project>
-      <Name>PunDemos.DemoHubEditor</Name>
-    </ProjectReference>
-    <ProjectReference Include="PunDemos.DemoSlotcarEditor.csproj">
-      <Project>{8CAB14C2-135D-BCB5-4F3C-5379BD8AC68F}</Project>
-      <Name>PunDemos.DemoSlotcarEditor</Name>
     </ProjectReference>
     <ProjectReference Include="PhotonUnityNetworking.Demos.csproj">
       <Project>{CF1F6129-2114-B89D-1454-822BF3C3FDBF}</Project>
