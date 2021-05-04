@@ -3,11 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
-
 public class Launcher : MonoBehaviourPunCallbacks
 {
     #region Private Serializable Fields
-
     [Tooltip("the ui panel to let the user enter a name conect and play")]
     [SerializeField]
     private GameObject controlPanel;
@@ -62,16 +60,13 @@ public class Launcher : MonoBehaviourPunCallbacks
     #endregion
 
     #region MonoBehaviorPunCallbacks Callbacks
-
     public override void OnConnectedToMaster()
     {
-
         if (isConnecting)
         {
             PhotonNetwork.JoinRandomRoom();
             isConnecting = false;
         }
-
     }
 
     public override void OnJoinRandomFailed(short returnCode, string message)
@@ -83,11 +78,9 @@ public class Launcher : MonoBehaviourPunCallbacks
     public override void OnJoinedRoom()
     {    
         Debug.Log("PUN Basics Tutorial/Launcher: OnJoinedRoom() called by PUN. Now this client is in a room.");
-
         if(PhotonNetwork.CurrentRoom.PlayerCount == 1)
         {
             Debug.Log("we load the 'Room for 1'");
-
             PhotonNetwork.LoadLevel("Room for 1");
         }
     }
@@ -97,11 +90,7 @@ public class Launcher : MonoBehaviourPunCallbacks
         isConnecting = false;
         progressionLabel.SetActive(false);
         controlPanel.SetActive(true);
-
         Debug.LogWarningFormat("PUN Basics Tutorial/Launcher: OnDisconnected() was called by PUN with reason {0}", cause);
     }
-
     #endregion
-
-
 }

@@ -10,24 +10,37 @@ public class PlayerManager : MonoBehaviourPunCallbacks
     public static GameObject LocalPlayerInatance;
 
     [Tooltip("The Player's name GameObject Prefab")]
-    [SerializeField]
-    public GameObject PlayerUiPrefab;
+    [SerializeField] 
+    public GameObject PlayerNamePrefab;
+
+  
+    public GameObject PlayerBody;
 
     [SerializeField]
     public GameObject hands;
+    public Canvas canvas;
 
     void Start()
     {
         UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnSceneLoaded;
 
-        if (PlayerUiPrefab != null)
+        if (photonView.IsMine)
         {
-            GameObject _uiGo = Instantiate(PlayerUiPrefab);
+            canvas.GetComponentInChildren<UnityEngine.UI.Text>().text = PhotonNetwork.NickName;
+            Instantiate(canvas);
+
+            PlayerBody.layer = LayerMask.NameToLayer("LocalPlayer");
+        }
+
+      
+        if (PlayerNamePrefab != null)
+        {
+            GameObject _uiGo = Instantiate(PlayerNamePrefab);
             _uiGo.SendMessage("SetTarget", this, SendMessageOptions.RequireReceiver);
         }
         else
         {
-            Debug.LogWarning("<Color=Red><a>Missing</a></Color> PlayerUiPrefab reference on player Prefab.", this);
+            Debug.LogWarning("<Color=Red><a>Missing</a></Color> PlayerNamePrefab reference on player Prefab.", this);
         }
     }
 
@@ -43,7 +56,7 @@ public class PlayerManager : MonoBehaviourPunCallbacks
         {
             transform.position = new Vector3(0f, 5f, 0f);
         }
-        
+   
     }
 
     public override void OnDisable()
@@ -69,9 +82,9 @@ public class PlayerManager : MonoBehaviourPunCallbacks
                 CardPickup[j].SendMessage("PLayersPos", this.hands, SendMessageOptions.RequireReceiver);
             }
             var KeyPickup = GameObject.FindGameObjectsWithTag("key");
-            for (int j = 0; j < KeyPickup.Length; j++)
+            for (int k = 0; k < KeyPickup.Length; k++)
             {
-                KeyPickup[j].SendMessage("PLayersPos", this.hands, SendMessageOptions.RequireReceiver);
+                KeyPickup[k].SendMessage("PLayersPos", this.hands, SendMessageOptions.RequireReceiver);
             }
 
         }

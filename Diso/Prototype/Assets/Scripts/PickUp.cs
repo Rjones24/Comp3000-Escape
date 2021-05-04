@@ -21,6 +21,7 @@ public class PickUp : MonoBehaviourPunCallbacks
     public float DistanceToGround = 0.4f;
     public LayerMask groundMask;
     bool Grounded;
+    bool hint = false;
 
     Transform targetTransform;
     Vector3 targetPosition;
@@ -34,9 +35,7 @@ public class PickUp : MonoBehaviourPunCallbacks
         }
         // Cache references for efficiency
         target = _target;
-       
         targetTransform = target.GetComponent<Transform>();
-
     }
 
     public void firstPickup()
@@ -46,8 +45,11 @@ public class PickUp : MonoBehaviourPunCallbacks
 
     private void OnCollisionEnter(Collision collision)
     {
-        isHolding = false;
-        firstPick = true;
+        if (!collision.gameObject.name.Equals("Player(Clone)"))
+        {
+            isHolding = false;
+            firstPick = true;
+        }
     }
 
     // Update is called once per frame
@@ -59,6 +61,12 @@ public class PickUp : MonoBehaviourPunCallbacks
                 {
                     firstPickup();
                     firstPick = false;
+                    if (!hint)
+                    {
+                        var Gui = GameObject.FindWithTag("Gui");
+                        Gui.SendMessage("interactable", true);
+                        hint = true;
+                    }
                 }
                 GetComponent<Rigidbody>().useGravity = false;
                 GetComponent<Rigidbody>().detectCollisions = true;
@@ -67,9 +75,7 @@ public class PickUp : MonoBehaviourPunCallbacks
                 {
                     targetPosition = targetTransform.position;
                     this.transform.position = targetPosition;
-
                 }
-
             }
             else
             {
@@ -96,18 +102,21 @@ public class PickUp : MonoBehaviourPunCallbacks
             return;
         }
     }
+
     void OnMouseDown()
     {
-        if (dist > Vector3.Distance(target.transform.position, transform.position))
+        if (!isHolding)
         {
-            isHolding = true;
-            base.photonView.RequestOwnership();
+            if (dist > Vector3.Distance(target.transform.position, transform.position))
+            {
+                isHolding = true;
+                base.photonView.RequestOwnership();
+            }
         }
-
-    }
-    void OnMouseUp()
-    {
-        isHolding = false;
-        firstPick = true;
+        else
+        {
+            isHolding = false;
+            firstPick = true;
+        }
     }
 }

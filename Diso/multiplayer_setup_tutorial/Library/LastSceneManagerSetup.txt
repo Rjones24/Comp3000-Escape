@@ -1,13 +1,5 @@
 sceneSetups:
-- path: Assets/Photon/PhotonUnityNetworking/Demos/PunBasics-Tutorial/Scenes/PunBasics-Launcher.unity
-  isLoaded: 0
-  isActive: 0
-  isSubScene: 0
-- path: Assets/Photon/PhotonUnityNetworking/Demos/PunBasics-Tutorial/Scenes/PunBasics-Launcher.unity
-  isLoaded: 0
-  isActive: 0
-  isSubScene: 0
-- path: Assets/Photon/PhotonUnityNetworking/Demos/PunBasics-Tutorial/Scenes/PunBasics-Launcher.unity
+- path: Assets/Scene/Launcher.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0

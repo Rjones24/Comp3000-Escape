@@ -1,26 +1,20 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
-using Photon.Realtime;
-using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviourPunCallbacks
 {
     [Tooltip("the prefab to use for representing the player")]
     public GameObject playerPrefab;
     public List<Vector3> Spawn;
-    
-
+   
     public static bool win = false;
 
-    static public GameManager Instance;
     void Start()
     {
-        Cursor.visible = true;
+        Cursor.visible.Equals(false);
         Spawn.Add(new Vector3(-2.5f, 1.5f, 0f));
         Spawn.Add(new Vector3(-45f, 1.5f, 0f)); 
-        Instance = this;
 
         if (playerPrefab == null)
         {
@@ -34,33 +28,16 @@ public class GameManager : MonoBehaviourPunCallbacks
                 {
                     if (PhotonNetwork.PlayerList[i].NickName == PhotonNetwork.LocalPlayer.NickName)
                     {
-                        Debug.LogFormat("we are instantiating LocalPlayer from{0}", SceneManagerHelper.ActiveSceneName);
+                        Debug.LogFormat("we are instantiating LocalPlayer", SceneManagerHelper.ActiveSceneName);
                         PhotonNetwork.Instantiate(this.playerPrefab.name, Spawn[i], Quaternion.identity, 0);
-
                     }
                 }
             }
             else
             {
-                Debug.LogFormat("Ignoring scene load for {0}", SceneManagerHelper.ActiveSceneName);
-
+                Debug.LogFormat("Ignoring scene load ", SceneManagerHelper.ActiveSceneName);
             }
         }
-    }
-
-    private void Update()
-    {
-        if (win)
-        {
-            winstate();
-            win = false;
-        }
-    }
-
-    public void winstate()
-    {
-        SceneManager.LoadScene("Win", LoadSceneMode.Single);
-        Cursor.lockState = CursorLockMode.None;
     }
 }
 

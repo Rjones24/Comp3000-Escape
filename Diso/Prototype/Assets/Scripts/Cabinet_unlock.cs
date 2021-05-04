@@ -11,17 +11,18 @@ public class Cabinet_unlock : MonoBehaviourPunCallbacks
     public GameObject item;
     Vector3 move = new Vector3(-0.3f, 0.0f, 0.0f);
 
-
     private void OnTriggerEnter(Collider other)
     {
+
         if (other.gameObject.tag.Equals("Player"))
         {
+            base.photonView.RequestOwnership();
             PopUp.SetActive(true);
         }
         else if (other.gameObject.tag.Equals("key"))
         {
             item.transform.position += move;
-            Destroy(this.gameObject);  
+            Destroy(this.gameObject);
         }
     }
 

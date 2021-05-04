@@ -12,10 +12,7 @@ public class Open_Door : MonoBehaviourPunCallbacks
     public GameObject PopUp;
 
     static bool door1Open = false;
-   static bool door2Open = false;
-
-    //private CardSwipe door1Open;
-   // private CardSwipe door2Open;
+    static bool door2Open = false;
 
     public bool onTrigger;
 

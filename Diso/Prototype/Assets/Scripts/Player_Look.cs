@@ -13,6 +13,7 @@ public class Player_Look : MonoBehaviourPunCallbacks
     private float YRotation = 0.0f;
 
     private float mouseX , mouseY;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,7 +33,7 @@ public class Player_Look : MonoBehaviourPunCallbacks
             float mouseY = Input.GetAxis("Mouse Y") * MouseSpeed * Time.deltaTime;
 
             this.XRotation -= mouseY;
-            this.XRotation = Mathf.Clamp(XRotation, -135.0f, -35.0f );
+            this.XRotation = Mathf.Clamp(XRotation, -135.0f, -15.0f );
 
             this.YRotation -= mouseX;
 

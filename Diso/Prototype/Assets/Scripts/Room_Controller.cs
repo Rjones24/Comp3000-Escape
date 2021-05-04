@@ -103,6 +103,14 @@ public class Room_Controller : MonoBehaviourPunCallbacks
 
         playerListEntries.Clear();
         playerListEntries = null;
+
+        Hashtable props = new Hashtable() { { Room_Controller.PLAYER_READY, false } };
+        PhotonNetwork.LocalPlayer.SetCustomProperties(props);
+
+        if (PhotonNetwork.IsMasterClient)
+        {
+            FindObjectOfType<Room_Controller>().LocalPlayerPropertiesUpdated();
+        }
     }
 
     public override void OnPlayerEnteredRoom(Player newPlayer)
@@ -194,6 +202,7 @@ public class Room_Controller : MonoBehaviourPunCallbacks
     {
         PhotonNetwork.CurrentRoom.IsOpen = false;
         PhotonNetwork.CurrentRoom.IsVisible = false;
-        SceneManager.LoadScene(1);
+        PhotonNetwork.LoadLevel(1);
+        //SceneManager.LoadScene(1);
     }
 }

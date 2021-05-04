@@ -67,7 +67,6 @@ public class Lobby_Controller : MonoBehaviourPunCallbacks
         else
         {
             Invalid.SetActive(true);
-            //Debug.LogError("Player Name is invalid.");
         }
       
     }
@@ -88,7 +87,6 @@ public class Lobby_Controller : MonoBehaviourPunCallbacks
                 {
                     cachedRoomList.Remove(info.Name);
                 }
-
                 continue;
             }
             if (cachedRoomList.ContainsKey(info.Name))
@@ -125,24 +123,23 @@ public override void OnJoinedLobby()
     {
         cachedRoomList.Clear();
         ClearRoomListView();
-      //  Debug.Log("OnJoinedLobby() called by PUN. Now this client is in the lobby.");
+        Debug.Log("OnJoinedLobby() called by PUN. Now this client is in the lobby.");
     }
     
     public override void OnCreatedRoom()
     {
-       //Debug.Log("OnJoinedRoom() called by PUN. Now this client is in a room.");
+       Debug.Log("OnJoinedRoom() called by PUN. Now this client is in a room.");
     }
 
 
     public override void OnCreateRoomFailed(short returnCode, string message)
     {
-      //  Debug.Log("faild to create room");
+       Debug.Log("faild to create room");
     }
 
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
     {
         ClearRoomListView();
-
         UpdateCachedRoomList(roomList);
         UpdateRoomListView();
     }

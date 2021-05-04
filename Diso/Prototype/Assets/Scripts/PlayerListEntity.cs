@@ -42,6 +42,7 @@ public class PlayerListEntity : MonoBehaviourPunCallbacks
     public void Initialize(int playerId, string name) {
         ownerId = playerId;
         PlayerName.text = name;
+
     }
 
     public void SetPlayerReady(bool playerReady)
