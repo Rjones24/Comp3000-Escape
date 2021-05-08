@@ -97,7 +97,6 @@ namespace Photon.Voice.Unity.Editor
                 EditorGUILayout.PropertyField(this.applyDontDestroyOnLoadSp, new GUIContent("Don't Destroy On Load", "Persists the GameObject across scenes using Unity's GameObject.DontDestroyOnLoad"));
                 if (this.applyDontDestroyOnLoadSp.boolValue && !PhotonEditorUtils.IsPrefab(this.connection.gameObject))
                 {
-                    
                     if (this.connection.transform.parent != null)
                     {
                         EditorGUILayout.HelpBox("DontDestroyOnLoad only works for root GameObjects or components on root GameObjects.", MessageType.Warning);

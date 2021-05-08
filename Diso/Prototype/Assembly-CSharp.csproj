@@ -114,6 +114,8 @@
     <Compile Include="Assets\Scripts\Cabinet_unlock.cs" />
     <Compile Include="Assets\Scripts\CardSwipe.cs" />
     <Compile Include="Assets\Scripts\CardSwipe_2.cs" />
+    <Compile Include="Assets\Scripts\ChangeOnClick.cs" />
+    <Compile Include="Assets\Scripts\Elevator_Move.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\Game_Gui.cs" />
     <Compile Include="Assets\Scripts\JoinRoomButton.cs" />

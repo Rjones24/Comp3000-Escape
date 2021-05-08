@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviourPunCallbacks
 {
@@ -39,5 +41,6 @@ public class GameManager : MonoBehaviourPunCallbacks
             }
         }
     }
+
 }
 

@@ -6,6 +6,7 @@ using UnityEngine;
 public class CardSwipe_2 : MonoBehaviourPunCallbacks
 {
     public GameObject PopUp;
+    public string name;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -15,8 +16,16 @@ public class CardSwipe_2 : MonoBehaviourPunCallbacks
         }
         else if (other.gameObject.tag.Equals("Card"))
         {
-            var OpenDoor = GameObject.FindWithTag("SpawnDoor");
-            OpenDoor.SendMessage("Door2", true);
+            if (name == "swipe1")
+            {
+                var OpenDoor = GameObject.FindWithTag("SpawnDoor");
+                OpenDoor.SendMessage("Door1", true);
+            }
+            else if (name == "swipe2")
+            {
+                var OpenDoor = GameObject.FindWithTag("SpawnDoor");
+                OpenDoor.SendMessage("Door2", true);
+            }
         }
     }
 

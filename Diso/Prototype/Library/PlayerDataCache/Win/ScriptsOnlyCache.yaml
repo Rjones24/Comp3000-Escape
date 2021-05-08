@@ -3,9 +3,10 @@ ScriptsOnlyBuild:
     Assembly-CSharp.dll:
     - Cabinet_unlock
     - CardSwipe
-    - CardSwipe_2
     - ChangeColor
     - ChangeName
+    - ChangeOnClick
+    - Elevator_Move
     - ExitGames.Demos.DemoPunVoice.FirstPersonController
     - ExitGames.Demos.DemoPunVoice.Highlighter
     - ExitGames.Demos.DemoPunVoice.OrthographicController
@@ -145,52 +146,56 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11700}
     - Class: 114
-      Script: {instanceID: 12340}
+      Script: {instanceID: 11912}
     - Class: 114
-      Script: {instanceID: 12574}
+      Script: {instanceID: 12342}
     - Class: 114
-      Script: {instanceID: 12700}
+      Script: {instanceID: 12576}
     - Class: 114
-      Script: {instanceID: 12774}
+      Script: {instanceID: 12702}
     - Class: 114
-      Script: {instanceID: 12822}
+      Script: {instanceID: 12776}
     - Class: 114
-      Script: {instanceID: 12870}
+      Script: {instanceID: 12824}
     - Class: 114
-      Script: {instanceID: 13064}
+      Script: {instanceID: 12872}
     - Class: 114
-      Script: {instanceID: 13146}
+      Script: {instanceID: 13066}
     - Class: 114
-      Script: {instanceID: 13432}
+      Script: {instanceID: 13148}
     - Class: 114
-      Script: {instanceID: 13440}
+      Script: {instanceID: 13434}
     - Class: 114
-      Script: {instanceID: 13584}
+      Script: {instanceID: 13442}
     - Class: 114
-      Script: {instanceID: 13888}
+      Script: {instanceID: 13586}
     - Class: 114
-      Script: {instanceID: 13950}
+      Script: {instanceID: 13616}
     - Class: 114
-      Script: {instanceID: 13990}
+      Script: {instanceID: 13892}
     - Class: 114
-      Script: {instanceID: 14122}
+      Script: {instanceID: 13954}
     - Class: 114
-      Script: {instanceID: 14160}
+      Script: {instanceID: 13994}
     - Class: 114
-      Script: {instanceID: 14334}
+      Script: {instanceID: 14164}
     - Class: 114
-      Script: {instanceID: 14352}
+      Script: {instanceID: 14338}
     - Class: 114
-      Script: {instanceID: 14388}
+      Script: {instanceID: 14356}
     - Class: 114
-      Script: {instanceID: 14408}
+      Script: {instanceID: 14392}
     - Class: 114
-      Script: {instanceID: 14524}
+      Script: {instanceID: 14412}
     - Class: 114
-      Script: {instanceID: 14526}
+      Script: {instanceID: 14528}
+    - Class: 114
+      Script: {instanceID: 14530}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
+      Script: {instanceID: 0}
+    - Class: 136
       Script: {instanceID: 0}
     - Class: 137
       Script: {instanceID: 0}
@@ -249,6 +254,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 82
       Script: {instanceID: 0}
+    - Class: 83
+      Script: {instanceID: 0}
     - Class: 90
       Script: {instanceID: 0}
     - Class: 91
@@ -298,89 +305,91 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11896}
     - Class: 114
-      Script: {instanceID: 12002}
+      Script: {instanceID: 12004}
     - Class: 114
-      Script: {instanceID: 12016}
+      Script: {instanceID: 12018}
     - Class: 114
-      Script: {instanceID: 12190}
+      Script: {instanceID: 12192}
     - Class: 114
-      Script: {instanceID: 12340}
+      Script: {instanceID: 12342}
     - Class: 114
-      Script: {instanceID: 12402}
+      Script: {instanceID: 12404}
     - Class: 114
-      Script: {instanceID: 12444}
+      Script: {instanceID: 12446}
     - Class: 114
-      Script: {instanceID: 12574}
+      Script: {instanceID: 12576}
     - Class: 114
-      Script: {instanceID: 12586}
+      Script: {instanceID: 12588}
     - Class: 114
-      Script: {instanceID: 12672}
+      Script: {instanceID: 12674}
     - Class: 114
-      Script: {instanceID: 12700}
-    - Class: 114
-      Script: {instanceID: 12758}
+      Script: {instanceID: 12702}
     - Class: 114
       Script: {instanceID: 12760}
     - Class: 114
-      Script: {instanceID: 12774}
+      Script: {instanceID: 12762}
     - Class: 114
-      Script: {instanceID: 12854}
+      Script: {instanceID: 12776}
     - Class: 114
-      Script: {instanceID: 12870}
+      Script: {instanceID: 12856}
     - Class: 114
-      Script: {instanceID: 13064}
+      Script: {instanceID: 12872}
     - Class: 114
-      Script: {instanceID: 13118}
+      Script: {instanceID: 13066}
     - Class: 114
-      Script: {instanceID: 13146}
+      Script: {instanceID: 13120}
     - Class: 114
-      Script: {instanceID: 13178}
+      Script: {instanceID: 13148}
     - Class: 114
-      Script: {instanceID: 13224}
+      Script: {instanceID: 13180}
     - Class: 114
-      Script: {instanceID: 13344}
+      Script: {instanceID: 13226}
     - Class: 114
-      Script: {instanceID: 13366}
+      Script: {instanceID: 13346}
     - Class: 114
-      Script: {instanceID: 13382}
+      Script: {instanceID: 13368}
     - Class: 114
-      Script: {instanceID: 13432}
+      Script: {instanceID: 13384}
     - Class: 114
-      Script: {instanceID: 13454}
+      Script: {instanceID: 13434}
     - Class: 114
-      Script: {instanceID: 13566}
+      Script: {instanceID: 13456}
     - Class: 114
-      Script: {instanceID: 13664}
+      Script: {instanceID: 13568}
     - Class: 114
-      Script: {instanceID: 13690}
+      Script: {instanceID: 13668}
     - Class: 114
-      Script: {instanceID: 13702}
+      Script: {instanceID: 13694}
     - Class: 114
-      Script: {instanceID: 13826}
+      Script: {instanceID: 13706}
     - Class: 114
-      Script: {instanceID: 13888}
+      Script: {instanceID: 13830}
     - Class: 114
-      Script: {instanceID: 13956}
+      Script: {instanceID: 13892}
     - Class: 114
-      Script: {instanceID: 13990}
+      Script: {instanceID: 13954}
     - Class: 114
-      Script: {instanceID: 14160}
+      Script: {instanceID: 13960}
     - Class: 114
-      Script: {instanceID: 14166}
+      Script: {instanceID: 13994}
     - Class: 114
-      Script: {instanceID: 14220}
+      Script: {instanceID: 14164}
     - Class: 114
-      Script: {instanceID: 14352}
+      Script: {instanceID: 14170}
     - Class: 114
-      Script: {instanceID: 14388}
+      Script: {instanceID: 14224}
     - Class: 114
-      Script: {instanceID: 14408}
+      Script: {instanceID: 14356}
     - Class: 114
-      Script: {instanceID: 14524}
+      Script: {instanceID: 14392}
     - Class: 114
-      Script: {instanceID: 14526}
+      Script: {instanceID: 14412}
     - Class: 114
-      Script: {instanceID: 14572}
+      Script: {instanceID: 14528}
+    - Class: 114
+      Script: {instanceID: 14530}
+    - Class: 114
+      Script: {instanceID: 14576}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 124
@@ -820,6 +829,12 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.EventSystems
     className: PhysicsRaycaster
+  - hash:
+      serializedVersion: 2
+      Hash: 6d229b5c55046bd2395d2f8cdbb2398f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: ChangeOnClick
   - hash:
       serializedVersion: 2
       Hash: 72f0e262cec16c9f4520dc3bf2b81796
@@ -1584,7 +1599,7 @@ ScriptsOnlyBuild:
     className: ServerProperty
   - hash:
       serializedVersion: 2
-      Hash: 5400befa19c5db93b0a78c3e9ffeb651
+      Hash: 4b9683ab1c2e400ace3825fc5c9f9dc4
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: CardSwipe
@@ -1600,6 +1615,12 @@ ScriptsOnlyBuild:
     assemblyName: PhotonUnityNetworking.Demos.dll
     namespaceName: Photon.Pun.Demo.Cockpit
     className: PropertyCell
+  - hash:
+      serializedVersion: 2
+      Hash: bc0dc6e9f6029bf9d9f6e389861f35bf
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Elevator_Move
   - hash:
       serializedVersion: 2
       Hash: 3f0fba59e2e9d3d9d1e438157bc71e4f
@@ -1836,7 +1857,7 @@ ScriptsOnlyBuild:
     className: IsConnectedAndReadyProperty
   - hash:
       serializedVersion: 2
-      Hash: 5400befa19c5db93b0a78c3e9ffeb651
+      Hash: df1e4dc696564243331a0122875c736b
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: CardSwipe_2
@@ -1932,7 +1953,7 @@ ScriptsOnlyBuild:
     className: TMP_ColorGradient
   - hash:
       serializedVersion: 2
-      Hash: 4380ab67c89e62e805a4923eca21a4b7
+      Hash: f7bf62b144ce3c33cc792a0393174a76
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Game_Gui
@@ -2150,4 +2171,4 @@ ScriptsOnlyBuild:
   scenePathNames:
   - Assets/Resources/Scenes/Launcher.unity
   - Assets/Resources/Scenes/2_player_level.unity
-  playerPath: C:/Users/Ryan/Documents/GitHub/Comp3000/Diso/Prototype/obj/Prototype.exe
+  playerPath: C:/Users/Ryan/Documents/GitHub/Comp3000/Diso/Prototype/obj/ESCAPE!.exe

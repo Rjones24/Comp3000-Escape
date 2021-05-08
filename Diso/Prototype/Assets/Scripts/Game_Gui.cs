@@ -1,8 +1,5 @@
 ﻿using UnityEngine;
 
-using Photon.Pun;
-using Photon.Realtime;
-using ExitGames.Client.Photon;
 
 
 public class Game_Gui : MonoBehaviour
@@ -16,8 +13,6 @@ public class Game_Gui : MonoBehaviour
     /// <summary>Unity GUI Window ID (must be unique or will cause issues).</summary>
     public int WindowId = 100;
 
-    public bool Locked_Door = false;
-    public bool Locked_cabinet = false;
     public bool Pickup = false;
     public bool Controls = false;
 
@@ -72,8 +67,6 @@ public class Game_Gui : MonoBehaviour
             GUILayout.Box("Pickup");
             GUILayout.Label("Items such as plants and some cabinets can be inteacted with by getting close to then and mouse clicking while the cross ahir is over them");
         }
-
-
         // if anything was clicked, the height of this window is likely changed. reduce it to be layouted again next frame
         if (GUI.changed)
         {

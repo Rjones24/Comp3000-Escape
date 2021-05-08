@@ -5,15 +5,28 @@ using UnityEngine.SceneManagement;
 using Photon.Pun;
 using System;
 
-public class Win_State : MonoBehaviour
-{    private void OnTriggerEnter(Collider other)
-    { 
+public class Win_State : MonoBehaviour 
+{
+
+
+    private void OnTriggerEnter(Collider other)
+    {
         PhotonNetwork.Disconnect();
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
-        PhotonNetwork.LoadLevel(0);
-        
+        var OpenDoor = GameObject.FindWithTag("SpawnDoor");
+        OpenDoor.SendMessage("Door1", false);
+        OpenDoor.SendMessage("Door2", false);
+        StartCoroutine(DisconnectandLoad());
     }
 
+
+
+    IEnumerator DisconnectandLoad()
+    {
+        while (PhotonNetwork.IsConnected)
+        { yield return null; }
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        SceneManager.LoadScene(0);
+    }
 
 }
